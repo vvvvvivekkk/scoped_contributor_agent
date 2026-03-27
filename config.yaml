@@ -18,5 +18,5 @@ search_language: ""         # 🔥 remove restriction
 max_repo_inactivity_days: 9999
 min_repo_stars: 0
 max_repo_stars: 999999            # 🔥 allow all
-
-  repo_allowlist: []   # 🔥 keep empty
+repo_allowlist:
+  - "vvvvvivekkk/scoped_contributor_agent" # 🔥 keep empty
