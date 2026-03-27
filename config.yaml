@@ -2,7 +2,7 @@ github:
   # GitHub personal access token (override via GITHUB_TOKEN env var)
   token: "${GITHUB_TOKEN}"
   # Your GitHub username (the bot's account)
-  username: "${GITHUB_USERNAME}"
+  username: "vvvvvivekkk"
   # Base API URL
   api_base: "https://api.github.com"
 
