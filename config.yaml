@@ -18,14 +18,10 @@ bot:
   max_prs_per_day: 2
   max_issues_per_run: 3
   min_confidence_score: 0.2
+search_labels:
+  - "good first issue"
 
-  search_labels:
-    - "good first issue"
-    - "easy"
-    - "beginner"
-
-  max_repo_stars: 2000
-  min_repo_stars: 0
-  max_repo_inactivity_days: 180
+max_issues_per_run: 5
+min_confidence_score: 0.2
 
   repo_allowlist: []
