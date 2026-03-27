@@ -1,62 +1,51 @@
 github:
-  # GitHub personal access token (override via GITHUB_TOKEN env var)
   token: "${GITHUB_TOKEN}"
-  # Your GitHub username (the bot's account)
   username: "vvvvvivekkk"
-  # Base API URL
   api_base: "https://api.github.com"
 
 ai:
-  # Provider: "openai" or "anthropic"
   provider: "openai"
-  # Model to use
   model: "gpt-4o"
-  # API key (override via OPENAI_API_KEY or ANTHROPIC_API_KEY)
   api_key: "${OPENAI_API_KEY}"
-  # Max tokens for LLM response
   max_tokens: 4096
-  # Temperature for generation
   temperature: 0.2
 
 bot:
-  # Maximum pull requests to create per day
-  max_prs_per_day: 3
-  # Maximum lines in a diff (abort if exceeded)
+  max_prs_per_day: 5
   max_diff_lines: 200
-  # Minimum confidence score from AI to proceed with a PR (0.0–1.0)
-  min_confidence_score: 0.70
-  # GitHub issue search labels (combined with AND)
+
+  # 🔥 IMPORTANT: lower confidence
+  min_confidence_score: 0.4
+
+  # 🔥 IMPORTANT: remove strict filter
   search_labels:
     - "good first issue"
-    - "help wanted"
-  # Only search Python repos
+
   search_language: "python"
-  # Max number of issues to evaluate per run
-  max_issues_per_run: 10
-  # Skip repos updated more than this many days ago
+  max_issues_per_run: 15
+
   max_repo_inactivity_days: 90
-  # Skip repos with more stars than this (too complex)
   max_repo_stars: 5000
-  # Skip repos with fewer stars than this (too inactive)
-  min_repo_stars: 10
-  # Allowlist of specific repos (owner/repo) — empty means all repos allowed
-  repo_allowlist: []
-  # Topics that indicate repos to avoid
+  min_repo_stars: 5
+
+  # 🔥 OPTIONAL: add test repo (very important for first PR)
+  repo_allowlist:
+    - "psf/requests"
+
   excluded_topics:
     - "hacktoberfest"
     - "spam"
-  # Labels on issues to skip
+
   skip_issue_labels:
     - "discussion"
     - "question"
     - "wontfix"
     - "invalid"
-  # Comment on the issue before opening PR
+
   comment_before_pr: true
-  # Temporary directory for cloning repos
+
   tmp_dir: "/tmp/contributor_bot"
-  # Log directory
   log_dir: "logs"
-  # Retry config
+
   retry_attempts: 3
   retry_backoff_seconds: 5
