@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  contributor-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: contributor_bot
+    restart: unless-stopped
+
+    # Load environment variables from .env file
+    env_file:
+      - .env
+
+    # Override default command for one-shot runs:
+    # command: ["python", "-m", "bot.main", "--run-once"]
+    # command: ["python", "-m", "bot.main", "--run-once", "--dry-run"]
+
+    volumes:
+      # Persist logs across container restarts
+      - ./logs:/app/logs
+      # Mount config for easy editing without rebuild
+      - ./config.yaml:/app/config.yaml:ro
+
+    # Optional: shared temp directory for repo clones
+    tmpfs:
+      - /tmp/contributor_bot
+
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TZ=UTC
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
