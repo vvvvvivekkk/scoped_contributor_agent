@@ -1,36 +1,20 @@
-github:
-  token: "${GITHUB_TOKEN}"
-  username: "vvvvvivekkk"
-  api_base: "https://api.github.com"
-
-ai:
-  provider: "openai"
-  model: "gpt-4o"
-  api_key: "${OPENAI_API_KEY}"
-  max_tokens: 4096
-  temperature: 0.2
-
 bot:
   max_prs_per_day: 5
   max_diff_lines: 200
+  min_confidence_score: 0.3
 
-  # 🔥 IMPORTANT: lower confidence
-  min_confidence_score: 0.4
-
-  # 🔥 IMPORTANT: remove strict filter
   search_labels:
     - "good first issue"
 
   search_language: "python"
-  max_issues_per_run: 15
+  max_issues_per_run: 30
 
   max_repo_inactivity_days: 90
   max_repo_stars: 5000
   min_repo_stars: 5
 
-  # 🔥 OPTIONAL: add test repo (very important for first PR)
-  repo_allowlist:
-    - "psf/requests"
+  # 🔥 REMOVE THIS for real usage
+  repo_allowlist: []
 
   excluded_topics:
     - "hacktoberfest"
@@ -41,11 +25,3 @@ bot:
     - "question"
     - "wontfix"
     - "invalid"
-
-  comment_before_pr: true
-
-  tmp_dir: "/tmp/contributor_bot"
-  log_dir: "logs"
-
-  retry_attempts: 3
-  retry_backoff_seconds: 5
