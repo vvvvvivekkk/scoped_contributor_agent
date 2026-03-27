@@ -14,9 +14,18 @@ bot:
   min_confidence_score: 0.0   # 🔥 allow all
 
 search_language: ""         # 🔥 remove restriction
+bot:
+  max_prs_per_day: 2
+  max_issues_per_run: 3
+  min_confidence_score: 0.2
 
-max_repo_inactivity_days: 9999
-min_repo_stars: 0
-max_repo_stars: 999999            # 🔥 allow all
-repo_allowlist:
-  - "vvvvvivekkk/scoped_contributor_agent" # 🔥 keep empty
+  search_labels:
+    - "good first issue"
+    - "easy"
+    - "beginner"
+
+  max_repo_stars: 2000
+  min_repo_stars: 0
+  max_repo_inactivity_days: 180
+
+  repo_allowlist: []
