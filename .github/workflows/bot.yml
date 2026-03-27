@@ -30,7 +30,7 @@ jobs:
 
       - name: Run bot
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GITHUB_USERNAME: vvvvvivekkk
         run: python -m bot.main --run-once
