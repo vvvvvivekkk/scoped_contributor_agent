@@ -216,7 +216,7 @@ Example `stats.json`:
 2. Create a **Classic token** with these scopes:
    - `repo` (full control of private repositories)
    - `read:user` (read user profile data)
-   - `workflow` (update GitHub Action workflows)
+   - `workflow` (update GitHub Actions workflows)
 3. Paste the token into `.env` as `GITHUB_TOKEN`
 
 ---
