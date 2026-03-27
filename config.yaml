@@ -11,8 +11,12 @@ bot:
 
   max_issues_per_run: 30
 
-  max_repo_inactivity_days: 3650   # 🔥 allow old repos
-  max_repo_stars: 100000           # 🔥 allow big repos
-  min_repo_stars: 0                # 🔥 allow all
+  min_confidence_score: 0.0   # 🔥 allow all
+
+search_language: ""         # 🔥 remove restriction
+
+max_repo_inactivity_days: 9999
+min_repo_stars: 0
+max_repo_stars: 999999            # 🔥 allow all
 
   repo_allowlist: []   # 🔥 keep empty
