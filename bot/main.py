@@ -1,4 +1,5 @@
 import time
+import logging
 from pathlib import Path
 
 from bot.core.repo_manager import RepoManager
@@ -7,8 +8,12 @@ from bot.core.fixer import Fixer
 from bot.core.validator import Validator
 from bot.core.pr_creator import PRCreator
 from bot.utils.config_loader import ConfigLoader
-from bot.utils.logger import Logger
 from bot.core.issue_fetcher import IssueFetcher
+
+
+# ✅ FIX: use standard logger
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 class ContributorBot:
@@ -36,14 +41,13 @@ class ContributorBot:
             return
 
         for issue in issues:
-            result = self._process_issue(issue)
+            self._process_issue(issue)
             time.sleep(5)  # avoid rate limits
 
         self.logger.info("bot_run_complete")
 
-    # 🔥 FIXED FUNCTION
     def _process_issue(self, issue) -> str:
-        self.logger.info("processing_issue", issue_url=issue.html_url)
+        self.logger.info(f"processing_issue: {issue.html_url}")
 
         try:
             # Step 1: fork + clone
@@ -57,7 +61,7 @@ class ContributorBot:
 
             # 🔥 Step 2: simple issue filter
             if not any(k in title for k in ["readme", "doc", "typo"]):
-                self.logger.info("Skipping complex issue", issue_url=issue.html_url)
+                self.logger.info("Skipping complex issue")
                 return "skipped"
 
             # Step 3: find relevant files
@@ -109,17 +113,16 @@ class ContributorBot:
                 modified_files=modified_files,
             )
 
-            self.logger.info("PR created", url=pr_url)
+            self.logger.info(f"PR created: {pr_url}")
             return "success"
 
         except Exception as e:
-            self.logger.error("error", error=str(e))
+            self.logger.error(f"error: {str(e)}")
             return "failed"
 
 
 def main():
     config = ConfigLoader().config
-    logger = Logger()
 
     bot = ContributorBot(config, logger)
     bot.run_once()
