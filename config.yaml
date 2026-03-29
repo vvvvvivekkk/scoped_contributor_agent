@@ -1,27 +1,51 @@
+github:
+  token: "${GITHUB_TOKEN}"
+  username: "vvvvvivekkk"
+  api_base: "https://api.github.com"
+
+ai:
+  provider: "openai"
+  model: "gpt-4o"
+  api_key: "${OPENAI_API_KEY}"
+  max_tokens: 4096
+  temperature: 0.2
+
 bot:
-  max_prs_per_day: 5
+  max_prs_per_day: 4
   max_diff_lines: 200
 
-  min_confidence_score: 0.2   # 🔥 lower more
+  # 🔥 allow more flexibility
+  min_confidence_score: 0.2
 
+  # ✅ IMPORTANT: only ONE label (avoid AND issue)
   search_labels:
     - "good first issue"
 
-  search_language: ""   # 🔥 remove restriction
+  # 🔥 allow all languages
+  search_language: ""
 
-  max_issues_per_run: 30
-
-  min_confidence_score: 0.0   # 🔥 allow all
-
-search_language: ""         # 🔥 remove restriction
-bot:
-  max_prs_per_day: 2
+  # 🔥 limit to avoid rate limit
   max_issues_per_run: 3
-  min_confidence_score: 0.2
-search_labels:
-  - "good first issue"
 
-max_issues_per_run: 5
-min_confidence_score: 0.2
+  # repo filtering (relaxed but safe)
+  max_repo_inactivity_days: 365
+  max_repo_stars: 2000
+  min_repo_stars: 0
 
+  # allow all repos
   repo_allowlist: []
+
+
+  skip_issue_labels:
+    - "discussion"
+    - "question"
+    - "wontfix"
+    - "invalid"
+
+  comment_before_pr: true
+
+  tmp_dir: "/tmp/contributor_bot"
+  log_dir: "logs"
+
+  retry_attempts: 3
+  retry_backoff_seconds: 5
